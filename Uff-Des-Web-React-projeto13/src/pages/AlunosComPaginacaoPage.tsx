@@ -7,8 +7,8 @@ import useRemoverAlunoPorId from "../hooks/useRemoverAlunoPorId.tsx";
 
 const AlunosComPaginacaoPage = () => {
   const [pagina, setPagina] = useState(0);
-  const [nome, setNome] = useState("");
-  const tamanho: number = 5;
+  const [nome] = useState("");
+  const tamanho: number = 4;
 
   const {
     data: resultadoPaginado,

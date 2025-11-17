@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import UFF from "../assets/UFF.png";
-import "bootstrap-icons/font/bootstrap-icons.css"
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const NavBar = () => {
   return (
@@ -40,6 +40,12 @@ const NavBar = () => {
               <NavLink className="nav-link" to="/listar-turmas">
                 <i className="bi bi-card-list me-1"></i>
                 Listar Turmas
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/turmas-com-alunos">
+                <i className="bi bi-search me-1"></i>
+                Procurar Turmas
               </NavLink>
             </li>
           </ul>

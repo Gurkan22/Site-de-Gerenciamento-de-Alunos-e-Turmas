@@ -5,6 +5,7 @@ import TurmaDetalhePage from "../pages/TurmaDetalhePage";
 import Layout from "./Layout";
 import AlunosComPaginacaoPage from "../pages/AlunosComPaginacaoPage";
 import TurmasComPaginacaoPage from "../pages/TurmasComPaginacaoPage";
+import TurmasComAlunosPage from "../pages/TurmasComAlunosPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "listar-alunos", element: <AlunosComPaginacaoPage /> },
       { path: "listar-turmas", element: <TurmasComPaginacaoPage /> },
       { path: "turmas/:id", element: <TurmaDetalhePage /> },
+      { path: "turmas-com-alunos", element: <TurmasComAlunosPage /> },
     ],
   },
 ]);

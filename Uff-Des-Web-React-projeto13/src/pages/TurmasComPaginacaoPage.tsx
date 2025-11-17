@@ -1,14 +1,16 @@
 import { useState } from "react";
-import TabelaDeTurmas from "../components/TabelaDeTurmas.tsx";
-import useRecuperarTurmasComPaginacao from "../hooks/useRecuperarTurmasComPaginacao.tsx";
+import { useNavigate } from "react-router-dom";
+import TabelaDeTurmas from "../components/TabelaDeTurmas";
+import useRecuperarTurmasComPaginacao from "../hooks/useRecuperarTurmasComPaginacao";
 import type { Turma } from "../interfaces/Turma";
 import Paginacao from "../components/Paginacao";
-import useRemoverTurmaPorId from "../hooks/useRemoverTurmaPorId.tsx";
+import useRemoverTurmaPorId from "../hooks/useRemoverTurmaPorId";
 
 const TurmasComPaginacaoPage = () => {
+  const navigate = useNavigate();
   const [pagina, setPagina] = useState(0);
-  const [nome, setNome] = useState("");
-  const tamanho: number = 5;
+  const nome = "";
+  const tamanho = 4;
 
   const {
     data: resultadoPaginado,
@@ -38,18 +40,20 @@ const TurmasComPaginacaoPage = () => {
   if (errorRecuperarTurmasComPaginacao) throw errorRecuperarTurmasComPaginacao;
   if (errorRemocaoTurma) throw errorRemocaoTurma;
   if (recuperandoTurmasComPaginacao) return <p>Recuperando turmas...</p>;
-  // if (removendoTurma) return <p>Removendo uma turma...</p>;
 
   const turmas: Turma[] = resultadoPaginado.itens;
-  const totalDePaginas: number = resultadoPaginado.totalDePaginas;
+  const totalDePaginas = resultadoPaginado.totalDePaginas;
 
   return (
     <>
       <h5>Lista de Turmas</h5>
       <hr className="mt-1" />
-
-      {/* <Pesquisa tratarPesquisa={tratarPesquisa} /> */}
-      <TabelaDeTurmas turmas={turmas} tratarRemocao={tratarRemocao} />
+      <TabelaDeTurmas
+        turmas={turmas}
+        turmaSelecionada={null}
+        onSelecionar={(turma) => navigate(`/turmas/${turma.id}`)}
+        tratarRemocao={tratarRemocao}
+      />
       <Paginacao
         pagina={pagina}
         totalDePaginas={totalDePaginas}

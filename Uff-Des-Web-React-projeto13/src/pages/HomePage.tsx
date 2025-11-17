@@ -19,6 +19,12 @@ const HomePage = () => {
         >
           Todas as Turmas
         </NavLink>
+        <NavLink
+          className="btn btn-outline-primary px-4 py-2"
+          to="/turmas-com-alunos"
+        >
+          Procurar Turmas
+        </NavLink>
       </div>
       <img src="/public/UFF2.jpg" alt="Descrição" />
       {/* <div className="col-lg-10">

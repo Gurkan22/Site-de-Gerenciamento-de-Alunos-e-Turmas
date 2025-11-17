@@ -1,5 +1,6 @@
 package com.carlosribeiro.apirestful.service;
 
+import com.carlosribeiro.apirestful.model.Aluno;
 import com.carlosribeiro.apirestful.model.Turma;
 import com.carlosribeiro.apirestful.repository.TurmaRepository;
 import com.carlosribeiro.apirestful.exception.EntidadeEmUsoException;
@@ -10,6 +11,7 @@ import java.util.List;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 @Service
@@ -25,6 +27,10 @@ public class TurmaService {
 
     public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
+    }
+
+    public List<Turma> buscarPorNome(String nome) {
+        return turmaRepository.findByNomeContainingIgnoreCase(nome);
     }
 
     public void remover(Long id) {
@@ -51,8 +57,20 @@ public class TurmaService {
         return turmaRepository.findAll(pageable);
     }
 
-    public List<com.carlosribeiro.apirestful.model.Aluno> buscarAlunosDaTurma(Long id) {
-        List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(id);
+    public List<com.carlosribeiro.apirestful.model.Aluno> buscarAlunosDaTurma(Long turmaId) {
+        List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
         return inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
     }
+
+    public Page<Aluno> listarAlunosDaTurmaPaginado(Long turmaId, Pageable pageable) {
+    // Busca alunos da turma via InscricaoRepository
+    List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
+    List<Aluno> alunos = inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
+    int start = (int) pageable.getOffset();
+    int end = Math.min((start + pageable.getPageSize()), alunos.size());
+    List<Aluno> pagedAlunos = alunos.subList(start, end);
+    return new PageImpl<>(pagedAlunos, pageable, alunos.size());
+    }
+
+
 }
