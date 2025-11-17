@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/turmas")
 @CrossOrigin("http://localhost:5173")
-// @RequiredArgsConstructor
+
 public class TurmaController {
     @GetMapping("/search")
     public ResponseEntity<List<Turma>> buscarPorNome(@RequestParam String nome) {
@@ -77,5 +77,11 @@ public class TurmaController {
                 page.getTotalPages(),
                 page.getNumber(),
                 page.getContent());
+    }
+
+    @DeleteMapping("/{turmaId}/alunos/{alunoId}")
+    public ResponseEntity<Void> removerAlunoDaTurma(@PathVariable Long turmaId, @PathVariable Long alunoId) {
+        turmaService.removerAlunoDaTurma(turmaId, alunoId);
+        return ResponseEntity.noContent().build();
     }
 }

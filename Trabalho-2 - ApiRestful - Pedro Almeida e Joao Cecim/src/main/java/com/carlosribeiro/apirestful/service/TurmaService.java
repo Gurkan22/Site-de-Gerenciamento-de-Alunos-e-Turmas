@@ -63,14 +63,25 @@ public class TurmaService {
     }
 
     public Page<Aluno> listarAlunosDaTurmaPaginado(Long turmaId, Pageable pageable) {
-    // Busca alunos da turma via InscricaoRepository
-    List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
-    List<Aluno> alunos = inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
-    int start = (int) pageable.getOffset();
-    int end = Math.min((start + pageable.getPageSize()), alunos.size());
-    List<Aluno> pagedAlunos = alunos.subList(start, end);
-    return new PageImpl<>(pagedAlunos, pageable, alunos.size());
+        // Busca alunos da turma via InscricaoRepository
+        List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
+        List<Aluno> alunos = inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), alunos.size());
+        List<Aluno> pagedAlunos = alunos.subList(start, end);
+        return new PageImpl<>(pagedAlunos, pageable, alunos.size());
     }
 
+    public void removerAlunoDaTurma(Long turmaId, Long alunoId) {
+        // Busca inscrição pelo turmaId e alunoId
+        java.util.List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository
+                .findByTurmaId(turmaId);
+        com.carlosribeiro.apirestful.model.Inscricao inscricao = inscricoes.stream()
+                .filter(i -> i.getAluno().getId().equals(alunoId))
+                .findFirst()
+                .orElseThrow(() -> new com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException(
+                        "Inscrição não encontrada para aluno/turma"));
+        inscricaoRepository.deleteById(inscricao.getId());
+    }
 
 }

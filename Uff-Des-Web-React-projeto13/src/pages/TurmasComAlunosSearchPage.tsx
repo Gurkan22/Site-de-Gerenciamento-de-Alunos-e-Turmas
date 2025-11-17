@@ -5,6 +5,7 @@ import useRecuperarTurmasFiltradas from "../hooks/useRecuperarTurmasFiltradas";
 import useRecuperarAlunosDaTurmaComPaginacao from "../hooks/useRecuperarAlunosDaTurmaComPaginacao";
 import Paginacao from "../components/Paginacao";
 import type { Turma } from "../interfaces/Turma";
+import useRemoverAlunoDaTurma from "../hooks/useRemoverAlunoDaTurma";
 
 const TurmasComAlunosSearchPage = () => {
   const [paginaAlunos, setPaginaAlunos] = useState(0);
@@ -33,9 +34,18 @@ const TurmasComAlunosSearchPage = () => {
     setPaginaAlunos(0);
   };
 
-  // Handler remoção (não faz nada, só para interface)
+  // Handler remoção de turma (mantém vazio)
   const tratarRemocaoTurma = () => {};
-  const tratarRemocaoAluno = () => {};
+
+  // Hook para remover aluno da turma
+  const removerAlunoDaTurma = useRemoverAlunoDaTurma();
+
+  // Handler para remover aluno da turma específica
+  const tratarRemocaoAluno = (alunoId: number) => {
+    if (turmaSelecionada) {
+      removerAlunoDaTurma.mutate({ turmaId: turmaSelecionada.id, alunoId });
+    }
+  };
 
   return (
     <div style={{ padding: 24 }}>

@@ -7,14 +7,14 @@ const TurmasComAlunosComboPage = () => {
   const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
   const [grupoAtual, setGrupoAtual] = useState<number[]>([]); // ids de alunos no grupo da turma selecionada
 
-  // Recupera todas as turmas para popular o combo box
+  // Recupera todas as turmas no combo box
   const {
     data: todasTurmas,
     isLoading: carregandoTurmas,
     error: erroTurmas,
   } = useRecuperarTodasTurmas();
 
-  // Busca alunos da turma selecionada (usa endpoint /turmas/{id}/alunos)
+  // Busca alunos da turma selecionada
   const {
     data: alunosDaTurma,
     error: erroAlunos,
@@ -25,7 +25,7 @@ const TurmasComAlunosComboPage = () => {
     setTurmaSelecionada(turma);
   };
 
-  // localStorage: chave por turma deve ser o código/nome da turma (ex: A1)
+  // localStorage: chave por turma é o código/nome da turma (ex: A1)
   const carregarGrupoDoLocalStorage = (turmaNome?: string | null) => {
     if (!turmaNome) return [] as number[];
     try {
