@@ -4,7 +4,7 @@ export async function recuperarAlunos(
   page: number = 1,
   pageSize: number = 10
 ): Promise<{
-  alunos: Array<{ id: string; nome: string; email: string; cpf: string }>;
+  alunos: Array<{ id: string; nome: string; email: string}>;
   total: number;
 }> {
   if (!turmaId) return { alunos: [], total: 0 };

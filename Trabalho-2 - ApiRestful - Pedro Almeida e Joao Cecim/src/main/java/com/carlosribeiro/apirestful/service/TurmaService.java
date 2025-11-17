@@ -7,6 +7,7 @@ import com.carlosribeiro.apirestful.exception.EntidadeEmUsoException;
 import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
 
 import java.util.List;
+import java.util.Comparator;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -59,12 +60,16 @@ public class TurmaService {
 
     public List<com.carlosribeiro.apirestful.model.Aluno> buscarAlunosDaTurma(Long turmaId) {
         List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
+        // ordenar por id da inscrição decrescente (mais recente primeiro)
+        inscricoes.sort(Comparator.comparing(com.carlosribeiro.apirestful.model.Inscricao::getId).reversed());
         return inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
     }
 
     public Page<Aluno> listarAlunosDaTurmaPaginado(Long turmaId, Pageable pageable) {
         // Busca alunos da turma via InscricaoRepository
         List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
+        // ordenar por id de inscrição decrescente antes de paginar
+        inscricoes.sort(Comparator.comparing(com.carlosribeiro.apirestful.model.Inscricao::getId).reversed());
         List<Aluno> alunos = inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), alunos.size());
