@@ -5,7 +5,8 @@ import TurmaDetalhePage from "../pages/TurmaDetalhePage";
 import Layout from "./Layout";
 import AlunosComPaginacaoPage from "../pages/AlunosComPaginacaoPage";
 import TurmasComPaginacaoPage from "../pages/TurmasComPaginacaoPage";
-import TurmasComAlunosPage from "../pages/TurmasComAlunosPage";
+import TurmasComAlunosSearchPage from "../pages/TurmasComAlunosSearchPage";
+import TurmasComAlunosComboPage from "../pages/TurmasComAlunosComboPage";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
       { path: "listar-alunos", element: <AlunosComPaginacaoPage /> },
       { path: "listar-turmas", element: <TurmasComPaginacaoPage /> },
       { path: "turmas/:id", element: <TurmaDetalhePage /> },
-      { path: "turmas-com-alunos", element: <TurmasComAlunosPage /> },
+      { path: "turmas-com-alunos-search", element: <TurmasComAlunosSearchPage /> },
+      { path: "turmas-com-alunos-combo", element: <TurmasComAlunosComboPage /> },
     ],
   },
 ]);

@@ -2,12 +2,11 @@ import { useState } from "react";
 import TabelaDeTurmas from "../components/TabelaDeTurmas";
 import TabelaDeAlunos from "../components/TabelaDeAlunos";
 import useRecuperarTurmasFiltradas from "../hooks/useRecuperarTurmasFiltradas";
-//import useRecuperarAlunosDaTurma from "../hooks/useRecuperarAlunosDaTurma";
 import useRecuperarAlunosDaTurmaComPaginacao from "../hooks/useRecuperarAlunosDaTurmaComPaginacao";
 import Paginacao from "../components/Paginacao";
 import type { Turma } from "../interfaces/Turma";
 
-const TurmasComAlunosPage = () => {
+const TurmasComAlunosSearchPage = () => {
   const [paginaAlunos, setPaginaAlunos] = useState(0);
   const tamanhoAlunos = 4;
   const [pesquisa, setPesquisa] = useState("");
@@ -106,4 +105,4 @@ const TurmasComAlunosPage = () => {
   );
 };
 
-export default TurmasComAlunosPage;
+export default TurmasComAlunosSearchPage;

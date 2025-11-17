@@ -12,7 +12,7 @@ const recuperarAlunosDaTurmaComPaginacao = async (
   queryString: QueryString
 ): Promise<ResultadoPaginado<Aluno>> => {
   const { pagina, tamanho, turmaId } = queryString;
-  if (!turmaId)
+  if (!turmaId) 
     return { itens: [], totalDePaginas: 0, totalDeItens: 0, paginaCorrente: 0 };
   const response = await fetch(
     `http://localhost:8080/turmas/${turmaId}/alunos/paginacao?` +
