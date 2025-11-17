@@ -2,19 +2,23 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for apirestful" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JPA-01-Produto-Inclui-Altera-Exclui-incompleto" />
-        <module name="Produto-Inclui-Altera-Exclui-01-JPA" />
-        <module name="Trabalho 1 - Dev Web" />
-        <module name="JPA-01-Produto-Inclui-Altera-Exclui" />
-        <module name="JPA-01-Produto-Inclui-Altera-Exclui-completo" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+        </processorPath>
+        <module name="trabalho2-apirestful-pedro-almeida-joao-cecim" />
+        <module name="Trabalho 2 - ApiRestful - Pedro Almeida e Joao Cecim" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Exercicio01-Produto-Inclui-Altera-Exclui-incompleto" target="22" />
-    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Trabalho 2 - ApiRestful - Pedro Almeida e Joao Cecim" options="-parameters" />
+      <module name="trabalho2-apirestful-pedro-almeida-joao-cecim" options="-parameters" />
+    </option>
   </component>
 </project>

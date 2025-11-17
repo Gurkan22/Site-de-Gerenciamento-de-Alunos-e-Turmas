@@ -1,0 +1,5 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.project.referencedLibraries": ["lib/**/*.jar", "path/para/lombok.jar"],
+  "java.compile.nullAnalysis.mode": "automatic"
+}
