@@ -1,6 +1,5 @@
 package com.carlosribeiro.apirestful.service;
 
-import com.carlosribeiro.apirestful.model.Aluno;
 import com.carlosribeiro.apirestful.model.Turma;
 import com.carlosribeiro.apirestful.repository.TurmaRepository;
 import com.carlosribeiro.apirestful.exception.EntidadeEmUsoException;
@@ -65,15 +64,23 @@ public class TurmaService {
         return inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
     }
 
-    public Page<Aluno> listarAlunosDaTurmaPaginado(Long turmaId, Pageable pageable) {
-        // Busca alunos da turma via InscricaoRepository
+    public Page<com.carlosribeiro.apirestful.model.AlunoComInscricao> listarAlunosDaTurmaPaginado(Long turmaId,
+            Pageable pageable) {
+        // Busca inscrições da turma
         List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
         // ordenar por id de inscrição decrescente antes de paginar
         inscricoes.sort(Comparator.comparing(com.carlosribeiro.apirestful.model.Inscricao::getId).reversed());
-        List<Aluno> alunos = inscricoes.stream().map(com.carlosribeiro.apirestful.model.Inscricao::getAluno).toList();
+        // Mapear para DTO que inclui id da inscrição e dados do aluno
+        List<com.carlosribeiro.apirestful.model.AlunoComInscricao> alunos = inscricoes.stream()
+                .map(i -> new com.carlosribeiro.apirestful.model.AlunoComInscricao(
+                        i.getId(),
+                        i.getAluno().getId(),
+                        i.getAluno().getNome(),
+                        i.getAluno().getEmail()))
+                .toList();
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), alunos.size());
-        List<Aluno> pagedAlunos = alunos.subList(start, end);
+        List<com.carlosribeiro.apirestful.model.AlunoComInscricao> pagedAlunos = alunos.subList(start, end);
         return new PageImpl<>(pagedAlunos, pageable, alunos.size());
     }
 

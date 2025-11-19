@@ -1,7 +1,8 @@
 import useInscricaoStore from "../store/InscricaoStore";
-import useRecuperarAlunosDaTurma from "../hooks/useRecuperarAlunosDaTurma";
+import useRecuperarAlunosDaTurmaComPaginacao from "../hooks/useRecuperarAlunosDaTurmaComPaginacao";
 import useRecuperarTurmaPorId from "../hooks/useRecuperarTurmaPorId";
 import Paginacao from "./Paginacao";
+import useRemoverAlunoDaTurma from "../hooks/useRemoverAlunoDaTurma";
 import { useEffect, useMemo } from "react";
 
 const TabelaDeAlunosPorTurma = () => {
@@ -11,8 +12,23 @@ const TabelaDeAlunosPorTurma = () => {
   const setPagina = useInscricaoStore((s) => s.setPagina);
   const setInscritos = useInscricaoStore((s) => s.setInscritos);
 
-  const query = useRecuperarAlunosDaTurma(turmaId);
-  const { data: alunos = [], isLoading } = query;
+  const pageSize = 4;
+  const {
+    data: resultado = {
+      itens: [],
+      totalDePaginas: 1,
+      totalDeItens: 0,
+      paginaCorrente: 0,
+    },
+    isLoading,
+    isError,
+    error,
+  } = useRecuperarAlunosDaTurmaComPaginacao({
+    pagina: pagina.toString(),
+    tamanho: pageSize.toString(),
+    turmaId: turmaId ?? 0,
+  });
+  const alunos = resultado.itens ?? [];
 
   const turmaQuery = useRecuperarTurmaPorId(turmaId);
   const turma = turmaQuery.data;
@@ -22,24 +38,21 @@ const TabelaDeAlunosPorTurma = () => {
     setInscritos(alunos);
   }, [alunos, setInscritos]);
 
-  // filtrar em memória pelo nome
+  // filtrar em memória pelo nome (aplica apenas aos itens da página atual)
   const filtrados = useMemo(() => {
     const termo = pesquisa.trim().toLowerCase();
     let arr = alunos;
     if (termo) arr = arr.filter((a) => a.nome.toLowerCase().includes(termo));
-    // ordenar desc por id (simula ordenação por id da inscrição)
-    arr = arr.slice().sort((a, b) => b.id - a.id);
     return arr;
   }, [alunos, pesquisa]);
 
-  const pageSize = 5;
-  const totalDePaginas = Math.ceil(filtrados.length / pageSize) || 1;
-
-  const paginado = filtrados.slice(pagina * pageSize, (pagina + 1) * pageSize);
+  const totalDePaginas = resultado.totalDePaginas || 1;
 
   useEffect(() => {
     if (pagina >= totalDePaginas) setPagina(0);
   }, [totalDePaginas, pagina, setPagina]);
+
+  const removerAlunoDaTurma = useRemoverAlunoDaTurma();
 
   if (!turmaId)
     return (
@@ -48,11 +61,11 @@ const TabelaDeAlunosPorTurma = () => {
       </div>
     );
 
-  if (query.isError)
+  if (isError)
     return (
       <div className="card p-3 text-danger">
         Erro ao recuperar alunos da turma:{" "}
-        {String((query.error as Error)?.message ?? "unknown")}
+        {String((error as Error)?.message ?? "unknown")}
       </div>
     );
 
@@ -87,20 +100,40 @@ const TabelaDeAlunosPorTurma = () => {
       ) : (
         <>
           <div className="table-responsive">
-            <table className="table table-bordered table-sm">
+            <table className="table table-bordered table-striped table-hover table-sm">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Email</th>
+                  <th className="text-center align-middle">ID</th>
+                  <th className="text-center align-middle">Matrícula</th>
+                  <th className="text-center align-middle">Nome</th>
+                  <th className="text-center align-middle">Email</th>
+                  <th className="text-center align-middle">Ação</th>
                 </tr>
               </thead>
               <tbody>
-                {paginado.map((a) => (
-                  <tr key={a.id}>
+                {filtrados.map((a) => (
+                  <tr key={a.inscricaoId ?? a.id}>
+                    <td className="text-center align-middle">
+                      {a.inscricaoId ?? "-"}
+                    </td>
                     <td className="text-center align-middle">{a.id}</td>
                     <td className="align-middle ps-3">{a.nome}</td>
                     <td className="align-middle">{a.email}</td>
+                    <td className="text-center align-middle">
+                      <button
+                        onClick={() =>
+                          removerAlunoDaTurma.mutate({
+                            turmaId: turmaId,
+                            alunoId: a.id,
+                          })
+                        }
+                        type="button"
+                        className="btn btn-sm"
+                        style={{ backgroundColor: "#ec0000ff", color: "#fff" }}
+                      >
+                        Remover
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
