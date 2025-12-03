@@ -21,14 +21,8 @@ const router = createBrowserRouter([
       { path: "listar-alunos", element: <AlunosComPaginacaoPage /> },
       { path: "listar-turmas", element: <TurmasComPaginacaoPage /> },
       { path: "turmas/:id", element: <TurmaDetalhePage /> },
-      {
-        path: "turmas-com-alunos-search",
-        element: <TurmasComAlunosSearchPage />,
-      },
-      {
-        path: "turmas-com-alunos-combo",
-        element: <TurmasComAlunosComboPage />,
-      },
+      { path: "turmas-com-alunos-search", element: <TurmasComAlunosSearchPage />},
+      { path: "turmas-com-alunos-combo", element: <TurmasComAlunosComboPage />  },
       { path: "inscricoes", element: <InscricaoPage /> },
       { path: "cadastrar-aluno", element: <CadastrarAlunoPage /> },
       { path: "alunos/:id", element: <AlunoPage /> },
