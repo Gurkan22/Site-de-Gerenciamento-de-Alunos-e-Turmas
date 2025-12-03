@@ -54,6 +54,18 @@ const NavBar = () => {
                 Procurar Turmas (Combo)
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/inscricoes">
+                <i className="bi bi-journal-plus me-1"></i>
+                Inscrições
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/cadastrar-aluno">
+                <i className="bi bi-person-plus me-1"></i>
+                Cadastrar Aluno
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

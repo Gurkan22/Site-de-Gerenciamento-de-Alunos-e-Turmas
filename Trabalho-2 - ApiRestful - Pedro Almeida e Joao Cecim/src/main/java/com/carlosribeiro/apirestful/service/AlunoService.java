@@ -49,6 +49,17 @@ public class AlunoService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Aluno não encontrado"));
     }
 
+    public java.util.List<com.carlosribeiro.apirestful.model.Inscricao> buscarInscricoesPorAluno(Long alunoId) {
+        // delega para o repositório de inscrições
+        // nota: InscricaoRepository é gerenciado em outro service, usar repository via
+        // injeção direta não ideal,
+        // mas para simplicidade acessamos pelo ApplicationContext via new instance não
+        // sendo adequado em produção.
+        // Melhor adicionar método no InscricaoService e delegar; aqui simplificamos a
+        // chamada via pacote.
+        throw new UnsupportedOperationException("buscarInscricoesPorAluno deve ser implementado no InscricaoService");
+    }
+
     public List<Aluno> buscarTodos() {
         return alunoRepository.findAll();
     }

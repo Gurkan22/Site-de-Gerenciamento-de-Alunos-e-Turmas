@@ -3,6 +3,7 @@ package com.carlosribeiro.apirestful.controller;
 import com.carlosribeiro.apirestful.model.Aluno;
 import com.carlosribeiro.apirestful.model.ResultadoPaginado;
 import com.carlosribeiro.apirestful.service.AlunoService;
+import com.carlosribeiro.apirestful.service.InscricaoService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,11 @@ import java.util.List;
 
 public class AlunoController {
     private final AlunoService alunoService;
+    private final InscricaoService inscricaoService;
 
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService, InscricaoService inscricaoService) {
         this.alunoService = alunoService;
+        this.inscricaoService = inscricaoService;
     }
 
     @PostMapping
@@ -45,6 +48,16 @@ public class AlunoController {
         return ResponseEntity.ok(alunoService.buscarPorId(id));
     }
 
+    @GetMapping("/{id}/turmas")
+    public ResponseEntity<java.util.List<com.carlosribeiro.apirestful.model.Turma>> buscarTurmasDoAluno(
+            @PathVariable Long id) {
+        // busca turmas pelas inscrições do aluno
+        java.util.List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoService.buscarPorAlunoId(id);
+        java.util.List<com.carlosribeiro.apirestful.model.Turma> turmas = inscricoes.stream()
+                .map(com.carlosribeiro.apirestful.model.Inscricao::getTurma).toList();
+        return ResponseEntity.ok(turmas);
+    }
+
     @GetMapping
     public ResponseEntity<List<Aluno>> buscarTodos() {
         return ResponseEntity.ok(alunoService.buscarTodos());
@@ -53,8 +66,7 @@ public class AlunoController {
     @GetMapping("/paginacao")
     public ResultadoPaginado<Aluno> listarPaginado(
             @RequestParam(name = "pagina", defaultValue = "0") int pagina,
-            @RequestParam(name = "tamanho", defaultValue = "5") int tamanho) 
-    {
+            @RequestParam(name = "tamanho", defaultValue = "5") int tamanho) {
         Pageable pageable = PageRequest.of(pagina, tamanho);
         Page<Aluno> page = alunoService.listarPaginado(pageable);
         return new ResultadoPaginado<>(
