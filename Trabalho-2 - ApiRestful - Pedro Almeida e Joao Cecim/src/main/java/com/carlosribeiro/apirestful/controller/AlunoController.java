@@ -3,6 +3,7 @@ package com.carlosribeiro.apirestful.controller;
 import com.carlosribeiro.apirestful.model.Aluno;
 import com.carlosribeiro.apirestful.model.ResultadoPaginado;
 import com.carlosribeiro.apirestful.service.AlunoService;
+import com.carlosribeiro.apirestful.service.InscricaoService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 
 @RestController
@@ -19,13 +22,16 @@ import java.util.List;
 
 public class AlunoController {
     private final AlunoService alunoService;
+    private final InscricaoService inscricaoService;
 
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService, InscricaoService inscricaoService) {
         this.alunoService = alunoService;
+        this.inscricaoService = inscricaoService;
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> criar(@RequestBody Aluno aluno) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Aluno> criar(@Valid @RequestBody Aluno aluno) {
         return ResponseEntity.ok(alunoService.salvar(aluno));
     }
 
@@ -35,6 +41,7 @@ public class AlunoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         alunoService.remover(id);
         return ResponseEntity.noContent().build();
@@ -45,7 +52,18 @@ public class AlunoController {
         return ResponseEntity.ok(alunoService.buscarPorId(id));
     }
 
+    @GetMapping("/{id}/turmas")
+    public ResponseEntity<java.util.List<com.carlosribeiro.apirestful.model.Turma>> buscarTurmasDoAluno(
+            @PathVariable Long id) {
+        // busca turmas pelas inscrições do aluno
+        java.util.List<com.carlosribeiro.apirestful.model.Inscricao> inscricoes = inscricaoService.buscarPorAlunoId(id);
+        java.util.List<com.carlosribeiro.apirestful.model.Turma> turmas = inscricoes.stream()
+                .map(com.carlosribeiro.apirestful.model.Inscricao::getTurma).toList();
+        return ResponseEntity.ok(turmas);
+    }
+
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<Aluno>> buscarTodos() {
         return ResponseEntity.ok(alunoService.buscarTodos());
     }
@@ -53,8 +71,7 @@ public class AlunoController {
     @GetMapping("/paginacao")
     public ResultadoPaginado<Aluno> listarPaginado(
             @RequestParam(name = "pagina", defaultValue = "0") int pagina,
-            @RequestParam(name = "tamanho", defaultValue = "5") int tamanho) 
-    {
+            @RequestParam(name = "tamanho", defaultValue = "5") int tamanho) {
         Pageable pageable = PageRequest.of(pagina, tamanho);
         Page<Aluno> page = alunoService.listarPaginado(pageable);
         return new ResultadoPaginado<>(

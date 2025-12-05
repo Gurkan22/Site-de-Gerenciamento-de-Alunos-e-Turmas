@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import type { Aluno } from "../interfaces/Aluno";
 import type { Turma } from "../interfaces/Turma";
+import useFetchWithAuth from "../hooks/useFetchWithAuth";
+import { URL_BASE } from "../util/constants";
 
 const TurmaDetalhePage = () => {
   const { id } = useParams();
@@ -9,17 +11,18 @@ const TurmaDetalhePage = () => {
   const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { fetchWithAuth } = useFetchWithAuth();
 
   useEffect(() => {
     const fetchTurma = async () => {
       try {
-        const turmaResp = await fetch(`http://localhost:8080/turmas/${id}`);
+        const turmaResp = await fetchWithAuth(`${URL_BASE}/turmas/${id}`);
         if (!turmaResp.ok) throw new Error("Erro ao buscar turma");
         const turmaData = await turmaResp.json();
         setTurma(turmaData);
 
-        const alunosResp = await fetch(
-          `http://localhost:8080/turmas/${id}/alunos`
+        const alunosResp = await fetchWithAuth(
+          `${URL_BASE}/turmas/${id}/alunos`
         );
         if (!alunosResp.ok) throw new Error("Erro ao buscar alunos da turma");
         const alunosData = await alunosResp.json();

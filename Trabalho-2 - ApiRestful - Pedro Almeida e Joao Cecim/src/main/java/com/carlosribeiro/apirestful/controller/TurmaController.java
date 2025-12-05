@@ -66,12 +66,13 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}/alunos/paginacao")
-    public ResultadoPaginado<com.carlosribeiro.apirestful.model.Aluno> listarAlunosDaTurmaPaginado(
+    public ResultadoPaginado<com.carlosribeiro.apirestful.model.AlunoComInscricao> listarAlunosDaTurmaPaginado(
             @PathVariable Long id,
             @RequestParam(name = "pagina", defaultValue = "0") int pagina,
             @RequestParam(name = "tamanho", defaultValue = "4") int tamanho) {
         Pageable pageable = PageRequest.of(pagina, tamanho);
-        Page<com.carlosribeiro.apirestful.model.Aluno> page = turmaService.listarAlunosDaTurmaPaginado(id, pageable);
+        Page<com.carlosribeiro.apirestful.model.AlunoComInscricao> page = turmaService.listarAlunosDaTurmaPaginado(id,
+                pageable);
         return new ResultadoPaginado<>(
                 page.getTotalElements(),
                 page.getTotalPages(),

@@ -16,6 +16,10 @@ import com.carlosribeiro.apirestful.repository.InscricaoRepository;
 import com.carlosribeiro.apirestful.repository.ProfessorRepository;
 import com.carlosribeiro.apirestful.repository.TurmaRepository;
 import com.carlosribeiro.apirestful.repository.DisciplinaRepository;
+import com.carlosribeiro.apirestful.auth.model.Usuario;
+import com.carlosribeiro.apirestful.auth.repository.UsuarioRepository;
+import com.carlosribeiro.apirestful.auth.util.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class ApirestfulApplication implements CommandLineRunner {
@@ -30,6 +34,10 @@ public class ApirestfulApplication implements CommandLineRunner {
 	private InscricaoRepository inscricaoRepository;
 	@Autowired
 	private DisciplinaRepository disciplinaRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApirestfulApplication.class, args);
@@ -154,5 +162,28 @@ public class ApirestfulApplication implements CommandLineRunner {
 		inscricaoRepository.save(new Inscricao(aluno8, turmaF2));
 		inscricaoRepository.save(new Inscricao(aluno9, turmaF2));
 		inscricaoRepository.save(new Inscricao(aluno10, turmaF2));
+
+		// Criar usuário ADMIN para avaliação (senha: password)
+		String adminEmail = "admin@uff.com";
+		if (usuarioRepository.findByEmail(adminEmail).isEmpty()) {
+			Usuario admin = Usuario.builder()
+					.nome("Administrador")
+					.email(adminEmail)
+					.senha(passwordEncoder.encode("password"))
+					.role(Role.ADMIN)
+					.build();
+			usuarioRepository.save(admin);
+		}
+		// Criar usuário ADMIN para avaliação (senha: password)
+		String userEmail = "user@uff.com";
+		if (usuarioRepository.findByEmail(userEmail).isEmpty()) {
+			Usuario admin = Usuario.builder()
+					.nome("Usuário")
+					.email(userEmail)
+					.senha(passwordEncoder.encode("password"))
+					.role(Role.USER)
+					.build();
+			usuarioRepository.save(admin);
+		}
 	}
 }

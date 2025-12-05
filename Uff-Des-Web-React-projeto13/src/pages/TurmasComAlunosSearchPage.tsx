@@ -28,6 +28,14 @@ const TurmasComAlunosSearchPage = () => {
       turmaId: turmaSelecionada?.id ?? 0,
     });
 
+  // normalizar resultadoAlunos: pode ser um array (lista) ou um objeto paginado { itens, totalDePaginas, ... }
+  const alunosItens: any[] = Array.isArray(resultadoAlunos)
+    ? resultadoAlunos
+    : resultadoAlunos?.itens ?? [];
+  const totalDePaginasResultado: number = Array.isArray(resultadoAlunos)
+    ? 1
+    : resultadoAlunos?.totalDePaginas ?? 1;
+
   // Handler seleção de turma
   const handleSelecionarTurma = (turma: Turma) => {
     setTurmaSelecionada(turma);
@@ -88,15 +96,15 @@ const TurmasComAlunosSearchPage = () => {
                 &nbsp;
                 <strong>Prof:</strong> {turmaSelecionada.professor?.nome}
               </div>
-              {resultadoAlunos && resultadoAlunos.itens.length > 0 && (
+              {alunosItens.length > 0 && (
                 <>
                   <TabelaDeAlunos
-                    alunos={resultadoAlunos.itens}
+                    alunos={alunosItens}
                     tratarRemocao={tratarRemocaoAluno}
                   />
                   <Paginacao
                     pagina={paginaAlunos}
-                    totalDePaginas={resultadoAlunos.totalDePaginas}
+                    totalDePaginas={totalDePaginasResultado}
                     tratarPaginacao={setPaginaAlunos}
                   />
                 </>

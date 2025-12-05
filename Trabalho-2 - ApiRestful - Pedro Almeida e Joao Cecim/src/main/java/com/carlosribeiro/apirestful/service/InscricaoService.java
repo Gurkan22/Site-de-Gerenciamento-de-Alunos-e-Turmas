@@ -17,6 +17,10 @@ public class InscricaoService {
         return inscricaoRepository.save(inscricao);
     }
 
+    public java.util.List<Inscricao> buscarPorAlunoId(Long alunoId) {
+        return inscricaoRepository.findByAlunoId(alunoId);
+    }
+
     public void remover(Long id) {
         if (!inscricaoRepository.existsById(id)) {
             throw new EntidadeNaoEncontradaException("Inscrição não encontrada");

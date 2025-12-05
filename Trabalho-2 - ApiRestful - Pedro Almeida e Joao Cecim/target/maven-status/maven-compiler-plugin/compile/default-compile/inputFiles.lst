@@ -1,22 +1,41 @@
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/ApirestfulApplication.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/AlunoController.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/InscricaoController.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/ProfessorController.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/TurmaController.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/EntidadeEmUsoException.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/EntidadeNaoEncontradaException.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/GlobalExceptionHandler.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Aluno.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/AlunoDTO.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Inscricao.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Professor.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/ProfessorDTO.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Turma.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/AlunoRepository.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/InscricaoRepository.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/ProfessorRepository.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/TurmaRepository.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/AlunoService.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/InscricaoService.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/ProfessorService.java
-/home/pedro/Documentos/Lab Dev Web/Testes/Trabalho 2 - Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/TurmaService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/ApirestfulApplication.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/config/SecurityConfig.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/controller/AuthenticationController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/filter/JwtAuthenticationFilter.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/model/Usuario.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/repository/UsuarioRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/service/JwtService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/service/UsuarioDetailsService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/util/Role.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/util/TokenResponse.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/auth/util/UsuarioLogin.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/config/CorsConfig.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/AlunoController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/DisciplinaController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/InscricaoController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/ProfessorController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/controller/TurmaController.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/EntidadeEmUsoException.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/EntidadeNaoEncontradaException.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/exception/GlobalExceptionHandler.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Aluno.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/AlunoComInscricao.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/AlunoDTO.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Disciplina.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Inscricao.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Professor.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/ProfessorDTO.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/ResultadoPaginado.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/Turma.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/model/TurmaDTO.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/AlunoRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/DisciplinaRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/InscricaoRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/InscricaoRepositoryTurmaAluno.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/ProfessorRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/repository/TurmaRepository.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/AlunoService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/DisciplinaService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/InscricaoService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/ProfessorService.java
+/home/pedro/Documentos/Lab Dev Web/Testes/Trabalhos/Trabalho 7- Teste/Trabalho-2 - ApiRestful - Pedro Almeida e Joao Cecim/src/main/java/com/carlosribeiro/apirestful/service/TurmaService.java

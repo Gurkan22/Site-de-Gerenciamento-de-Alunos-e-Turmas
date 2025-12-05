@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import type { Aluno } from "../interfaces/Aluno";
-import type { ResultadoPaginado } from "../interfaces/ResultadoPaginado";
+import useApi from "./useApi";
+import useTokenStore from "../store/TokenStore";
 
 interface QueryString {
   pagina: string;
@@ -8,26 +8,10 @@ interface QueryString {
   turmaId: number;
 }
 
-const recuperarAlunosDaTurmaComPaginacao = async (
-  queryString: QueryString
-): Promise<ResultadoPaginado<Aluno>> => {
-  const { pagina, tamanho, turmaId } = queryString;
-  if (!turmaId) 
-    return { itens: [], totalDePaginas: 0, totalDeItens: 0, paginaCorrente: 0 };
-  const response = await fetch(
-    `http://localhost:8080/turmas/${turmaId}/alunos/paginacao?` +
-      new URLSearchParams({ pagina, tamanho })
-  );
-  if (!response.ok) {
-    throw new Error(
-      "Ocorreu um erro ao recuperar alunos da turma com paginação. Status code: " +
-        response.status
-    );
-  }
-  return await response.json();
-};
-
 const useRecuperarAlunosDaTurmaComPaginacao = (queryString: QueryString) => {
+  const api = useApi();
+  const token = useTokenStore((s) => s.tokenResponse.token);
+
   return useQuery({
     queryKey: [
       "turmas",
@@ -35,10 +19,16 @@ const useRecuperarAlunosDaTurmaComPaginacao = (queryString: QueryString) => {
       "alunos",
       "paginacao",
       queryString,
+      token,
     ],
-    queryFn: () => recuperarAlunosDaTurmaComPaginacao(queryString),
-    enabled: !!queryString.turmaId,
+    queryFn: () =>
+      api.recuperarAlunosDaTurmaComPaginacao(
+        queryString.turmaId,
+        parseInt(queryString.pagina),
+        parseInt(queryString.tamanho)
+      ),
     placeholderData: keepPreviousData,
+    enabled: !!queryString.turmaId && !!token,
   });
 };
 

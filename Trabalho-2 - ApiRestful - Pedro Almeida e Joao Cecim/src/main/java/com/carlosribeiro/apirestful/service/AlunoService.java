@@ -40,13 +40,18 @@ public class AlunoService {
         try {
             alunoRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new EntidadeEmUsoException("Não é possível remover o aluno pois ele está vinculado a uma turma.");
+            throw new EntidadeEmUsoException(
+                    "Aluno inscrito em uma turma ou mais, remova todas as inscrições antes de remover o aluno");
         }
     }
 
     public Aluno buscarPorId(Long id) {
         return alunoRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Aluno não encontrado"));
+    }
+
+    public java.util.List<com.carlosribeiro.apirestful.model.Inscricao> buscarInscricoesPorAluno(Long alunoId) {
+        throw new UnsupportedOperationException("buscarInscricoesPorAluno deve ser implementado no InscricaoService");
     }
 
     public List<Aluno> buscarTodos() {

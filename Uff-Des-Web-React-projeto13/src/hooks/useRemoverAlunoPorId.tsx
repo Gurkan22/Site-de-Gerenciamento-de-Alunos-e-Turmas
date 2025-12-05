@@ -1,29 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../main";
-
-const removerAlunoPorId = async (id: number) => {
-  const response = await fetch("http://localhost:8080/alunos/" + id, {
-    method: "DELETE",
-  });
-  if (!response.ok) {
-    throw new Error(
-      "Ocorreu um erro ao remover o aluno com id = " +
-        id +
-        ". Status code: " +
-        response.status
-    );
-  }
- 
-};
+import useApi from "./useApi";
 
 const useRemoverAlunoPorId = () => {
+  const api = useApi();
+
   return useMutation({
-    mutationFn: (id: number) => removerAlunoPorId(id),
+    mutationFn: (id: number) => api.removerAluno(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["alunos"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["alunos"] });
     },
   });
 };
+
 export default useRemoverAlunoPorId;
