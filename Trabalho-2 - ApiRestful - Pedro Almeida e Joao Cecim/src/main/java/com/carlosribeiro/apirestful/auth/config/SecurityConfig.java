@@ -79,9 +79,15 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(c -> {
-                    c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                    c.authenticationEntryPoint((request, response, authException) -> {
+                        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().write("Necessário estar autenticado para acessar este recurso.");
+                    });
                     c.accessDeniedHandler((request, response, accessDeniedException) -> {
                         response.setStatus(HttpStatus.FORBIDDEN.value());
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().write("Você não tem permissão para acessar este recurso.");
                     });
                 });
 

@@ -44,7 +44,7 @@ public class AlunoController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         alunoService.remover(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
